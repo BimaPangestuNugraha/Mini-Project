@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../ViewModel/halamanHome.dart';
+
 class SelamatDatang extends StatefulWidget {
   @override
   State<SelamatDatang> createState() => _SelamatDatangState();
@@ -46,7 +48,7 @@ class _SelamatDatangState extends State<SelamatDatang> {
                     fontFamily: 'IrishGrover',
                     fontSize: 40,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: Color.fromARGB(255, 244, 243, 243),
                     shadows: [
                       Shadow(
                         blurRadius: 20.0,
@@ -71,11 +73,15 @@ class _SelamatDatangState extends State<SelamatDatang> {
                       ),
                     ],
                   ),
+                  
                 ),
                 SizedBox(height: 13), 
                 ElevatedButton(
                   onPressed: () {
-
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => HalamanAwal()), 
+                      );
                   },
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
@@ -89,7 +95,7 @@ class _SelamatDatangState extends State<SelamatDatang> {
                     fontSize: 32,
                     fontFamily: 'Acme',
                     color: const Color.fromARGB(255, 253, 252, 252)
-    ),),
+                  ),),
                 ),
               ],
             ),
