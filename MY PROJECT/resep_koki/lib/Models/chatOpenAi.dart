@@ -1,26 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'config.dart';
-
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Form dan Tombol Submit',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyForm(),
-    );
-  }
-}
 
 class MyForm extends StatefulWidget {
   @override
@@ -33,40 +13,33 @@ class _MyFormState extends State<MyForm> {
   String _response = '';
 
   Future<void> _submitForm() async {
-    String key = AppConfig().openaiApiKey;
+    String key = '';
     if (_formKey.currentState!.validate()) {
-      final apiKey = key; // Ganti dengan kunci API OpenAI Anda
-      const apiUrl =
-          'https://api.openai.com/v1/completions'; // Ganti dengan URL endpoint yang sesuai
-      // const apiUrl =
-      //     'https://api.openai.com/v1/chat/completions'; // Ganti dengan URL endpoint yang sesuai
+      final apiKey = key;
+      const apiUrl = '';
 
       final response = await http.post(
         Uri.parse(apiUrl),
         headers: <String, String>{
           'Content-Type': 'application/json;charset=UTF-8',
           'Charset': 'utf-8',
-          'Authorization': 'Bearer $apiKey'
+          'Authorization': 'Bearer $apiKey',
         },
         body: jsonEncode(<String, dynamic>{
-          // "model": "gpt-3.5-turbo",
           "model": "text-davinci-003",
           'prompt':
-              "jika ada yang bertanya kamu siapa, silahkan di jawab saya adalah kecerdasan buatan dari open AI dengan model davinci 003" +
-                  _textController.text,
-          'max_tokens': 50, // Jumlah token maksimum dalam respons
+              'Saya punya bahan-bahan berikut: ${_textController.text}. Bisa tolong rekomendasikan masakan yang dapat saya buat?',
+              
         }),
       );
 
       if (response.statusCode == 200) {
-        // Berhasil mendapatkan respons dari server
         final responseData = jsonDecode(response.body);
         print('Respon sukses: ${responseData['choices'][0]['text']}');
         setState(() {
           _response = responseData['choices'][0]['text'];
         });
       } else {
-        // Gagal mendapatkan respons dari server
         print('Gagal mendapatkan respons. Kode status: ${response.statusCode}');
       }
     } else {
@@ -78,7 +51,8 @@ class _MyFormState extends State<MyForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Form dan Tombol Submit'),
+        backgroundColor: Color(0xFF393737),
+        title: Text('Tanyakan pada kami'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -86,23 +60,43 @@ class _MyFormState extends State<MyForm> {
           key: _formKey,
           child: Column(
             children: [
-              TextFormField(
-                controller: _textController,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Field harus diisi';
-                  }
-                  return null;
-                },
-                decoration: InputDecoration(labelText: 'Input Text'),
+              Container(
+                width: double.infinity,
+                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+                child: TextFormField(
+                  controller: _textController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Anda belum mengisi pertanyaan.';
+                    }
+                    return null;
+                  },
+                  decoration: InputDecoration(
+                    labelText: 'Bahan apa saja yang anda punya?',
+                  ),
+                ),
               ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: _submitForm,
-                child: const Text('Submit'),
+              Align(
+                alignment: Alignment.centerRight,
+                child: ElevatedButton(
+                  onPressed: _submitForm,
+                  style: ElevatedButton.styleFrom(
+                    primary: Color(0xFF393737),
+                  ),
+                  child: Text('Kirim', style: TextStyle(color: Colors.white)),
+                ),
               ),
-              const SizedBox(height: 20),
-              Text('Response: $_response'),
+              SizedBox(height: 30),
+              Container(
+                width: 500.0,
+                height: 515.0,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0),
+                  color: Color(0xFFD9D9D9),
+                ),
+                padding: EdgeInsets.all(16.0),
+                child: Text('$_response'),
+              ),
             ],
           ),
         ),

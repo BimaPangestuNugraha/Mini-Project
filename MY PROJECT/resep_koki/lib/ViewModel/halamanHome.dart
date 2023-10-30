@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:resep_koki/Models/chatOpenAi.dart';
 import 'resepCamilan.dart';
 import 'resepMinuman.dart';
 import 'resepOlahanDaging.dart';
@@ -33,16 +34,19 @@ class HalamanAwal extends StatelessWidget {
                 color: Color.fromARGB(255, 0, 16, 1),
               ),
               onPressed: () {
-  
+                Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MyForm()), 
+                );
               },
             ),
           ),
         ],
       ),
-      body: Stack(
+      body: Stack( 
         children: [
           Positioned(
-            top: 0,
+            top: 0, 
             left: 0,
             right: 0,
             child: ClipRect(

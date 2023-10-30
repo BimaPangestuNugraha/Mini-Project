@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 
-class IsiResepSateSapi extends StatefulWidget {
-  const IsiResepSateSapi({Key? key}) : super(key: key);
+class IsiResepSemurAyamTahuKentang extends StatefulWidget {
+  const IsiResepSemurAyamTahuKentang({Key? key}) : super(key: key);
 
   @override
-  _IsiResepSateSapiState createState() => _IsiResepSateSapiState();
+  _IsiResepSemurAyamTahuKentangState createState() => _IsiResepSemurAyamTahuKentangState();
 }
 
-class _IsiResepSateSapiState extends State<IsiResepSateSapi> {
+class _IsiResepSemurAyamTahuKentangState extends State<IsiResepSemurAyamTahuKentang> {
   Map<String, dynamic>? resepData;
   TextEditingController nameController = TextEditingController();
   TextEditingController reviewController = TextEditingController();
@@ -24,7 +24,7 @@ class _IsiResepSateSapiState extends State<IsiResepSateSapi> {
 
   void fetchData() async {
     Dio dio = Dio();
-    String url = 'https://653a5019e3b530c8d9e97bc1.mockapi.io/ResepOlahanDaging/2/IsiResepMasakan';
+    String url = 'https://653a5019e3b530c8d9e97bc1.mockapi.io/ResepOlahanDaging/1/IsiResepMasakan';
 
     try {
       Response response = await dio.get(url);
@@ -81,12 +81,11 @@ class _IsiResepSateSapiState extends State<IsiResepSateSapi> {
       backgroundColor: Color(0xFF393737),
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 175, 173, 173),
-        title: Text(
-          resepData?['namaMasakan'] ?? 'Resep Tidak Ditemukan',
-          style: TextStyle(
-            fontFamily: 'Acme', 
-            color: Colors.black, 
-          ),
+        title: Text(resepData?['namaMasakan'] ?? 'Resep Tidak Ditemukan',
+        style: TextStyle(
+      fontFamily: 'Acme',
+      color: Colors.black, 
+    ),
         ),
       ),
       body: resepData != null
@@ -96,7 +95,7 @@ class _IsiResepSateSapiState extends State<IsiResepSateSapi> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
+                   Container(
                       width: double.infinity,
                       height: 300,
                       decoration: BoxDecoration(
@@ -111,155 +110,87 @@ class _IsiResepSateSapiState extends State<IsiResepSateSapi> {
                       ),
                     ),
                     SizedBox(height: 16),
+                    Text('Bahan-bahan:'),
                     Container(
-                      width: double.infinity,
-                      padding: EdgeInsets.all(8),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.0),
-                        color: Color(0xFFC96F06),
-                      ),
-                      child: Text(
-                        'Bahan-bahan:',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.white,
-                          fontFamily: 'Acme',
-                        ),
-                      ),
-                    ),
-                    Container(
-                      width: double.infinity,
-                      padding: EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.0),
-                        color: Color(0xFFD9D9D9),
+                        color: Colors.white,
                       ),
                       child: Column(
                         children: (resepData?['bahan'] as List<dynamic>).map((bahan) {
                           return ListTile(
-                            title: Text(
-                              bahan.toString(),
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontFamily: 'Acme',
-                              ),
-                            ),
+                            title: Text(bahan.toString()),
                           );
                         }).toList(),
                       ),
                     ),
                     SizedBox(height: 16),
-                    Container(
-                      width: double.infinity,
-                      padding: EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.0),
-                        color: Color(0xFFC96F06),
-                      ),
-                      child: Text(
-                        'Langkah Pembuatan:',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.white,
-                          fontFamily: 'Acme',
-                        ),
-                      ),
+                    Text('Langkah Pembuatan:'),
+                    Column(
+                      children: (resepData?['langkahPembuatan'] as List<dynamic>).map((langkah) {
+                        return Text(langkah.toString());
+                      }).toList(),
                     ),
+                    SizedBox(height: 16),
                     Container(
-                      width: double.infinity,
+                      width: 200.0,
                       padding: EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.0),
-                        color: Color(0xFFD9D9D9),
+                        border: Border.all(color: const Color.fromARGB(255, 251, 250, 250)),
+                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
                       ),
                       child: Column(
-                        children: (resepData?['langkahPembuatan'] as List<dynamic>).map((langkah) {
-                          return Text(
-                            langkah.toString(),
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontFamily: 'Acme',
-                            ),
-                          );
-                        }).toList(),
-                      ),
-                    ),
-                    SizedBox(height: 30),
-                    Container(
-                      width: double.infinity,
-                      padding: EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.0),
-                        color: Color(0xFFD9D9D9),
-                      ),
-                      child: Text("Masukan Ulasan anda terkait resep ini")
-                      ),
-                      SizedBox(height: 5),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          width: double.infinity,
-                          padding: EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10.0),
-                            color: Color(0xFFD9D9D9),
-                          ),
-                          child: TextFormField(
+                        children: [
+                          Text('Nama:'),
+                          TextFormField(
                             controller: nameController,
                             decoration: InputDecoration(
                               hintText: 'Masukkan nama Anda',
                               border: InputBorder.none,
-                              focusedBorder: InputBorder.none,
-                              enabledBorder: InputBorder.none,
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: const Color.fromARGB(255, 245, 245, 245)),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: const Color.fromARGB(255, 253, 252, 252)),
+                              ),
                             ),
                           ),
-                        ),
-                        SizedBox(height: 5),
-                        Container(
-                          width: double.infinity,
-                          padding: EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10.0),
-                            color: Color(0xFFD9D9D9),
-                          ),
-                          child: TextField(
+                          SizedBox(height: 16),
+                          Text('Ulasan:'),
+                          TextField(
                             controller: reviewController,
                             decoration: InputDecoration(
                               hintText: 'Masukkan ulasan Anda',
                               border: InputBorder.none,
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: const Color.fromARGB(255, 245, 245, 245)),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: const Color.fromARGB(255, 253, 252, 252)),
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 10),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: ElevatedButton(
-                        onPressed: submitReview,
-                        style: ElevatedButton.styleFrom(
-                        primary: Color(0xFFD9D9D9),
-                        ),
-                        child: Text(editingIndex != null ? 'Perbarui Ulasan' : 'Kirim Ulasan',
-                        style: TextStyle(color: Colors.black)
-                        ),
+                        ],
                       ),
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(height: 16),
+                    ElevatedButton(
+                      onPressed: submitReview,
+                      child: Text(editingIndex != null ? 'Perbarui Ulasan' : 'Kirim Ulasan'),
+                    ),
+                    SizedBox(height: 16),
                     ListView.builder(
                       shrinkWrap: true,
                       itemCount: userReviews.length,
                       itemBuilder: (context, index) {
                         return Container(
-                          width: double.infinity,
+                          width: 200.0,
                           padding: EdgeInsets.all(8),
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10.0),
-                            color: Color(0xFFD9D9D9),
+                            border: Border.all(color: const Color.fromARGB(255, 251, 250, 250)),
+                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
                           ),
                           child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
