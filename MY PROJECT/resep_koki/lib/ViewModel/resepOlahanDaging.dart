@@ -40,6 +40,64 @@ class _ResepOlahanDagingState extends State<ResepOlahanDaging> {
     }
   }
 
+  void createNewItem() async {
+  try {
+    Dio dio = Dio();
+    String url = 'https://653a5019e3b530c8d9e97bc1.mockapi.io/ResepOlahanDaging';
+    Map<String, dynamic> newItemData = {
+      "createdAt": "2023-10-27T12:00:00.000Z",
+      "name": "Tumis Kangkung",
+      "avatar": "https://bing.com/th?id=OSK.9530b85d9b3e416008dd5c797eb60187"
+    };
+
+    Response response = await dio.post(url, data: newItemData);
+    if (response.statusCode == 201) {
+      print('Item baru "Tumis Kangkung" berhasil dibuat.');
+      fetchData();
+    } else {
+      print('Gagal membuat item baru. Kode status: ${response.statusCode}');
+    }
+  } catch (error) {
+    print('Terjadi kesalahan saat membuat item baru: $error');
+  }
+}
+
+
+void deleteItem(String itemId) async {
+  Dio dio = Dio();
+  String url = 'https://653a5019e3b530c8d9e97bc1.mockapi.io/ResepOlahanDaging/$itemId';
+
+  try {
+    Response response = await dio.delete(url);
+    if (response.statusCode == 200) {
+      print('Item berhasil dihapus');
+      fetchData(); 
+    } else {
+      print('Gagal menghapus item. Kode status: ${response.statusCode}');
+    }
+  } catch (error) {
+    print('Terjadi kesalahan saat menghapus item: $error');
+  }
+}
+
+void updateItem(String itemId, Map<String, dynamic> newData) async {
+  Dio dio = Dio();
+  String url = 'https://653a5019e3b530c8d9e97bc1.mockapi.io/ResepOlahanDaging/$itemId';
+
+  try {
+    Response response = await dio.put(url, data: newData);
+    if (response.statusCode == 200) {
+      print('Item berhasil diperbarui');
+      fetchData();
+    } else {
+      print('Gagal memperbarui item. Kode status: ${response.statusCode}');
+    }
+  } catch (error) {
+    print('Terjadi kesalahan saat memperbarui item: $error');
+  }
+}
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -144,8 +202,23 @@ class _ResepOlahanDagingState extends State<ResepOlahanDaging> {
                               fontFamily: 'Acme',
                             ),
                           ),
-                        ),
+              
+                        ), 
+                        
+IconButton(
+  icon: Icon(Icons.edit),
+  color: Colors.blue,
+  onPressed: () {
+    String itemId = '1';
+    Map<String, dynamic> newData = {
+      "name": "Semur Ayammmm",
+    };
+    updateItem(itemId, newData);
+  },
+),
+
                       ],
+                      
                     ),
                   ),
                 );
