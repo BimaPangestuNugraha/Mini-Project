@@ -4,7 +4,12 @@ import 'package:resep_koki/Models/ChefProvider.dart';
 import 'package:resep_koki/Models/selamatDatangPage.dart'; 
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => ChefProvider(), // ini inisialisasi providernya kak agar tersedia diseluruh aplikasi
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

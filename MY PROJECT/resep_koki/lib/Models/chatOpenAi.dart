@@ -86,18 +86,29 @@ class _MyFormState extends State<MyForm> {
                 ),
               ),
             ),
-            ElevatedButton(
-              onPressed: () {
-                _showChefContacts();
-              },
-              child: Text('Lihat Kontak Chef'),
-            ),
-            if (showChefContacts)
-              for (final chef in Provider.of<ChefProvider>(context).chefContacts)
-                ListTile(
-                  title: Text('Nama: ${chef.name}'),
-                  subtitle: Text('Telepon: ${chef.phoneNumber}'),
-                ),
+ElevatedButton(
+  onPressed: () {
+    _showChefContacts();
+  },
+  child: Text('Lihat Kontak Chef'),
+),
+if (showChefContacts)
+  Consumer<ChefProvider>(
+    builder: (context, chefProvider, child) {
+      final chefContacts = chefProvider.chefContacts;
+      return ListView.builder(
+        itemCount: chefContacts.length,
+        itemBuilder: (context, index) {
+          final chef = chefContacts[index];
+          return ListTile(
+            title: Text('Nama: ${chef.name}'),
+            subtitle: Text('Telepon: ${chef.phoneNumber}'),
+          );
+        },
+      );
+    },
+  ),
+
             if (showChefContacts)
               ElevatedButton(
                 onPressed: () {
