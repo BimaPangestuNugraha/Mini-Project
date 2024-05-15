@@ -6,22 +6,20 @@ import 'resepOlahanDaging.dart';
 import 'resepOlahanKue.dart';
 import 'package:provider/provider.dart';
 
-
-
 class HalamanAwal extends StatelessWidget {
   const HalamanAwal({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF393737),
+      backgroundColor: const Color(0xFF393737),
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 247, 247, 247),
+        backgroundColor: const Color.fromARGB(255, 247, 247, 247),
         centerTitle: true,
-        title: Text(
+        title: const Text(
           'RESEP KOKI',
           style: TextStyle(
-            fontFamily: 'Acme', 
+            fontFamily: 'Acme',
             fontSize: 40,
             color: Color(0xFFC96F06),
           ),
@@ -29,27 +27,27 @@ class HalamanAwal extends StatelessWidget {
         leading: Image.asset('lib/assets/LOGOO.jpg'),
         actions: <Widget>[
           Padding(
-            padding: EdgeInsets.only(right: 16.0),
+            padding: const EdgeInsets.only(right: 16.0),
             child: IconButton(
-              icon: Icon(
+              icon: const Icon(
                 Icons.chat,
                 size: 40,
                 color: Color.fromARGB(255, 0, 16, 1),
               ),
               onPressed: () {
                 Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => MyForm()), 
+                  context,
+                  MaterialPageRoute(builder: (context) => MyForm()),
                 );
               },
             ),
           ),
         ],
       ),
-      body: Stack( 
+      body: Stack(
         children: [
           Positioned(
-            top: 0, 
+            top: 0,
             left: 0,
             right: 0,
             child: ClipRect(
@@ -59,7 +57,7 @@ class HalamanAwal extends StatelessWidget {
               ),
             ),
           ),
-          Positioned(
+          const Positioned(
             top: 40,
             left: 17,
             right: 17,
@@ -69,7 +67,7 @@ class HalamanAwal extends StatelessWidget {
                 Text(
                   'Hallo sahabat koki,',
                   style: TextStyle(
-                    fontFamily: 'Acme', 
+                    fontFamily: 'Acme',
                     fontSize: 30,
                     color: Colors.white,
                     shadows: [
@@ -81,11 +79,11 @@ class HalamanAwal extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(height: 10), 
+                SizedBox(height: 10),
                 Text(
                   'Jadikan masakanmu disukai',
                   style: TextStyle(
-                    fontFamily: 'Acme', 
+                    fontFamily: 'Acme',
                     fontSize: 30,
                     color: Colors.white,
                     shadows: [
@@ -131,13 +129,13 @@ class HalamanAwal extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 240, 
+            top: 240,
             left: 17,
             right: 17,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   'Kategori Masakan',
                   style: TextStyle(
                     fontFamily: 'Acme',
@@ -145,105 +143,116 @@ class HalamanAwal extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                SizedBox(height: 27), 
+                const SizedBox(height: 27),
                 Align(
                   alignment: Alignment.bottomCenter,
-                  child: ElevatedButton(
+                  child: 
+                  ElevatedButton(
                     onPressed: () {
                       Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ResepOlahanDaging()), 
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ResepOlahanDaging()),
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(horizontal: 95, vertical: 25),
-                      minimumSize: Size(300, 50),
+                      padding:
+                          const EdgeInsets.symmetric(horizontal: 95, vertical: 25),
+                      minimumSize: const Size(300, 50),
                       primary: Color.fromARGB(255, 175, 173, 173),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(60.0),
                       ),
                     ),
-                    child: Text('Resep Olahan Daging',
-                    style: TextStyle(
-                      fontSize: 32,
-                      fontFamily: 'Acme',
-                      color: Color.fromARGB(229, 56, 37, 37)
-                    ),),
+                    child: const Text(
+                      'Resep Olahan Daging',
+                      style: TextStyle(
+                          fontSize: 32,
+                          fontFamily: 'Acme',
+                          color: Color.fromARGB(229, 56, 37, 37)),
+                    ),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ResepOlahanKue()), 
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ResepOlahanKue()),
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(horizontal: 115, vertical: 25),
+                      padding:
+                          const EdgeInsets.symmetric(horizontal: 115, vertical: 25),
                       primary: Color.fromARGB(255, 175, 173, 173),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(60.0),
                       ),
                     ),
-                    child: Text('Resep Olahan Kue',
-                    style: TextStyle(
-                      fontSize: 32,
-                      fontFamily: 'Acme',
-                      color: Color.fromARGB(229, 56, 37, 37)
-                    ),),
+                    child: const Text(
+                      'Resep Olahan Kue',
+                      style: TextStyle(
+                          fontSize: 32,
+                          fontFamily: 'Acme',
+                          color: Color.fromARGB(229, 56, 37, 37)),
+                    ),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ResepCamilan()), 
+                        context,
+                        MaterialPageRoute(builder: (context) => const ResepCamilan()),
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(horizontal: 135, vertical: 25),
+                      padding:
+                          const EdgeInsets.symmetric(horizontal: 135, vertical: 25),
                       primary: Color.fromARGB(255, 175, 173, 173),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(60.0),
                       ),
                     ),
-                    child: Text('Resep Camilan',
-                    style: TextStyle(
-                      fontSize: 32,
-                      fontFamily: 'Acme',
-                      color: Color.fromARGB(229, 56, 37, 37)
-                    ),),
+                    child: const Text(
+                      'Resep Camilan',
+                      style: TextStyle(
+                          fontSize: 32,
+                          fontFamily: 'Acme',
+                          color: Color.fromARGB(229, 56, 37, 37)),
+                    ),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ResepMinuman()), 
+                        context,
+                        MaterialPageRoute(builder: (context) => const ResepMinuman()),
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(horizontal: 125, vertical: 25),
+                      padding:
+                          const EdgeInsets.symmetric(horizontal: 125, vertical: 25),
                       primary: Color.fromARGB(255, 175, 173, 173),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(60.0),
                       ),
                     ),
-                    child: Text('Resep Minuman',
-                    style: TextStyle(
-                      fontSize: 32,
-                      fontFamily: 'Acme',
-                      color: Color.fromARGB(229, 56, 37, 37)
-                    ),),
+                    child: const Text(
+                      'Resep Minuman',
+                      style: TextStyle(
+                          fontSize: 32,
+                          fontFamily: 'Acme',
+                          color: Color.fromARGB(229, 56, 37, 37)),
+                    ),
                   ),
                 ),
               ],

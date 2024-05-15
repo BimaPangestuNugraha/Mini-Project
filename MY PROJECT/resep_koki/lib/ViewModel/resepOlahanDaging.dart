@@ -25,7 +25,8 @@ class _ResepOlahanDagingState extends State<ResepOlahanDaging> {
 
   void fetchData() async {
     Dio dio = Dio();
-    String url = 'https://653a5019e3b530c8d9e97bc1.mockapi.io/ResepOlahanDaging';
+    String url =
+        'https://653a5019e3b530c8d9e97bc1.mockapi.io/ResepOlahanDaging';
     try {
       Response response = await dio.get(url);
       if (response.statusCode == 200) {
@@ -41,71 +42,72 @@ class _ResepOlahanDagingState extends State<ResepOlahanDaging> {
   }
 
   void createNewItem() async {
-  try {
+    try {
+      Dio dio = Dio();
+      String url =
+          'https://653a5019e3b530c8d9e97bc1.mockapi.io/ResepOlahanDaging';
+      Map<String, dynamic> newItemData = {
+        "createdAt": "2023-10-27T12:00:00.000Z",
+        "name": "Tumis Kangkung",
+        "avatar": "https://bing.com/th?id=OSK.9530b85d9b3e416008dd5c797eb60187"
+      };
+
+      Response response = await dio.post(url, data: newItemData);
+      if (response.statusCode == 201) {
+        print('Item baru "Tumis Kangkung" berhasil dibuat.');
+        fetchData();
+      } else {
+        print('Gagal membuat item baru. Kode status: ${response.statusCode}');
+      }
+    } catch (error) {
+      print('Terjadi kesalahan saat membuat item baru: $error');
+    }
+  }
+
+  void deleteItem(String itemId) async {
     Dio dio = Dio();
-    String url = 'https://653a5019e3b530c8d9e97bc1.mockapi.io/ResepOlahanDaging';
-    Map<String, dynamic> newItemData = {
-      "createdAt": "2023-10-27T12:00:00.000Z",
-      "name": "Tumis Kangkung",
-      "avatar": "https://bing.com/th?id=OSK.9530b85d9b3e416008dd5c797eb60187"
-    };
+    String url =
+        'https://653a5019e3b530c8d9e97bc1.mockapi.io/ResepOlahanDaging/$itemId';
 
-    Response response = await dio.post(url, data: newItemData);
-    if (response.statusCode == 201) {
-      print('Item baru "Tumis Kangkung" berhasil dibuat.');
-      fetchData();
-    } else {
-      print('Gagal membuat item baru. Kode status: ${response.statusCode}');
+    try {
+      Response response = await dio.delete(url);
+      if (response.statusCode == 200) {
+        print('Item berhasil dihapus');
+        fetchData();
+      } else {
+        print('Gagal menghapus item. Kode status: ${response.statusCode}');
+      }
+    } catch (error) {
+      print('Terjadi kesalahan saat menghapus item: $error');
     }
-  } catch (error) {
-    print('Terjadi kesalahan saat membuat item baru: $error');
   }
-}
 
+  void updateItem(String itemId, Map<String, dynamic> newData) async {
+    Dio dio = Dio();
+    String url =
+        'https://653a5019e3b530c8d9e97bc1.mockapi.io/ResepOlahanDaging/$itemId';
 
-void deleteItem(String itemId) async {
-  Dio dio = Dio();
-  String url = 'https://653a5019e3b530c8d9e97bc1.mockapi.io/ResepOlahanDaging/$itemId';
-
-  try {
-    Response response = await dio.delete(url);
-    if (response.statusCode == 200) {
-      print('Item berhasil dihapus');
-      fetchData(); 
-    } else {
-      print('Gagal menghapus item. Kode status: ${response.statusCode}');
+    try {
+      Response response = await dio.put(url, data: newData);
+      if (response.statusCode == 200) {
+        print('Item berhasil diperbarui');
+        fetchData();
+      } else {
+        print('Gagal memperbarui item. Kode status: ${response.statusCode}');
+      }
+    } catch (error) {
+      print('Terjadi kesalahan saat memperbarui item: $error');
     }
-  } catch (error) {
-    print('Terjadi kesalahan saat menghapus item: $error');
   }
-}
-
-void updateItem(String itemId, Map<String, dynamic> newData) async {
-  Dio dio = Dio();
-  String url = 'https://653a5019e3b530c8d9e97bc1.mockapi.io/ResepOlahanDaging/$itemId';
-
-  try {
-    Response response = await dio.put(url, data: newData);
-    if (response.statusCode == 200) {
-      print('Item berhasil diperbarui');
-      fetchData();
-    } else {
-      print('Gagal memperbarui item. Kode status: ${response.statusCode}');
-    }
-  } catch (error) {
-    print('Terjadi kesalahan saat memperbarui item: $error');
-  }
-}
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF393737),
+      backgroundColor: const Color(0xFF393737),
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 247, 247, 247),
+        backgroundColor: const Color.fromARGB(255, 247, 247, 247),
         centerTitle: true,
-        title: Text(
+        title: const Text(
           'Resep Olahan Daging',
           style: TextStyle(
             fontFamily: 'Acme',
@@ -116,9 +118,9 @@ void updateItem(String itemId, Map<String, dynamic> newData) async {
         leading: Image.asset('lib/assets/LOGOO.jpg'),
         actions: <Widget>[
           Padding(
-            padding: EdgeInsets.only(right: 16.0),
+            padding: const EdgeInsets.only(right: 16.0),
             child: IconButton(
-              icon: Icon(
+              icon: const Icon(
                 Icons.chat,
                 size: 40,
                 color: Color.fromARGB(255, 0, 16, 1),
@@ -134,7 +136,7 @@ void updateItem(String itemId, Map<String, dynamic> newData) async {
         ],
       ),
       body: userData.isEmpty
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : ListView.builder(
               itemCount: userData.length,
               itemBuilder: (context, index) {
@@ -144,31 +146,32 @@ void updateItem(String itemId, Map<String, dynamic> newData) async {
                       if (index == 0) {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => IsiResepSemurAyamTahuKentang(),
+                            builder: (context) =>
+                                const IsiResepSemurAyamTahuKentang(),
                           ),
                         );
                       } else if (index == 1) {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => IsiResepSateSapi(),
+                            builder: (context) => const IsiResepSateSapi(),
                           ),
                         );
                       } else if (index == 2) {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => IsiResepTongsengAyam(),
+                            builder: (context) => const IsiResepTongsengAyam(),
                           ),
                         );
                       } else if (index == 3) {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => IsiResepAyamWoku(),
+                            builder: (context) => const IsiResepAyamWoku(),
                           ),
                         );
                       } else if (index == 4) {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => IsiResepAsamIgaSapi(),
+                            builder: (context) => const IsiResepAsamIgaSapi(),
                           ),
                         );
                       }
@@ -176,8 +179,8 @@ void updateItem(String itemId, Map<String, dynamic> newData) async {
                     child: Stack(
                       children: [
                         Container(
-                          width: double.infinity, 
-                          height: 200, 
+                          width: double.infinity,
+                          height: 200,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20.0),
                             image: DecorationImage(
@@ -190,35 +193,31 @@ void updateItem(String itemId, Map<String, dynamic> newData) async {
                           width: double.infinity,
                           height: 200,
                           alignment: Alignment.center,
-                           decoration: BoxDecoration(
+                          decoration: BoxDecoration(
                             //  color: Color(0x80000000),
-                           borderRadius: BorderRadius.circular(20.0),
-                           ),
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
                           child: Text(
                             userData[index]['name'],
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.white,
                               fontSize: 18,
                               fontFamily: 'Acme',
                             ),
                           ),
-              
-                        ), 
-                        
-IconButton(
-  icon: Icon(Icons.edit),
-  color: Colors.blue,
-  onPressed: () {
-    String itemId = '1';
-    Map<String, dynamic> newData = {
-      "name": "Semur Ayammmm",
-    };
-    updateItem(itemId, newData);
-  },
-),
-
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.edit),
+                          color: Colors.blue,
+                          onPressed: () {
+                            String itemId = '1';
+                            Map<String, dynamic> newData = {
+                              "name": "Semur Ayammmm",
+                            };
+                            updateItem(itemId, newData);
+                          },
+                        ),
                       ],
-                      
                     ),
                   ),
                 );

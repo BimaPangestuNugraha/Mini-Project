@@ -24,7 +24,8 @@ class _IsiResepAyamWokuState extends State<IsiResepAyamWoku> {
 
   void fetchData() async {
     Dio dio = Dio();
-    String url = 'https://653a5019e3b530c8d9e97bc1.mockapi.io/ResepOlahanDaging/4/IsiResepMasakan';
+    String url =
+        'https://653a5019e3b530c8d9e97bc1.mockapi.io/ResepOlahanDaging/4/IsiResepMasakan';
 
     try {
       Response response = await dio.get(url);
@@ -81,11 +82,12 @@ class _IsiResepAyamWokuState extends State<IsiResepAyamWoku> {
       backgroundColor: Color(0xFF393737),
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 175, 173, 173),
-        title: Text(resepData?['namaMasakan'] ?? 'Resep Tidak Ditemukan',
-        style: TextStyle(
-      fontFamily: 'Acme',
-      color: Colors.black, 
-    ),
+        title: Text(
+          resepData?['namaMasakan'] ?? 'Resep Tidak Ditemukan',
+          style: TextStyle(
+            fontFamily: 'Acme',
+            color: Colors.black,
+          ),
         ),
       ),
       body: resepData != null
@@ -117,7 +119,8 @@ class _IsiResepAyamWokuState extends State<IsiResepAyamWoku> {
                         color: Colors.white,
                       ),
                       child: Column(
-                        children: (resepData?['bahan'] as List<dynamic>).map((bahan) {
+                        children:
+                            (resepData?['bahan'] as List<dynamic>).map((bahan) {
                           return ListTile(
                             title: Text(bahan.toString()),
                           );
@@ -127,7 +130,9 @@ class _IsiResepAyamWokuState extends State<IsiResepAyamWoku> {
                     SizedBox(height: 16),
                     Text('Langkah Pembuatan:'),
                     Column(
-                      children: (resepData?['langkahPembuatan'] as List<dynamic>).map((langkah) {
+                      children:
+                          (resepData?['langkahPembuatan'] as List<dynamic>)
+                              .map((langkah) {
                         return Text(langkah.toString());
                       }).toList(),
                     ),
@@ -136,7 +141,8 @@ class _IsiResepAyamWokuState extends State<IsiResepAyamWoku> {
                       width: 200.0,
                       padding: EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        border: Border.all(color: const Color.fromARGB(255, 251, 250, 250)),
+                        border: Border.all(
+                            color: const Color.fromARGB(255, 251, 250, 250)),
                         borderRadius: BorderRadius.all(Radius.circular(10.0)),
                       ),
                       child: Column(
@@ -148,10 +154,14 @@ class _IsiResepAyamWokuState extends State<IsiResepAyamWoku> {
                               hintText: 'Masukkan nama Anda',
                               border: InputBorder.none,
                               focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: const Color.fromARGB(255, 245, 245, 245)),
+                                borderSide: BorderSide(
+                                    color: const Color.fromARGB(
+                                        255, 245, 245, 245)),
                               ),
                               enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: const Color.fromARGB(255, 253, 252, 252)),
+                                borderSide: BorderSide(
+                                    color: const Color.fromARGB(
+                                        255, 253, 252, 252)),
                               ),
                             ),
                           ),
@@ -159,14 +169,18 @@ class _IsiResepAyamWokuState extends State<IsiResepAyamWoku> {
                           Text('Ulasan:'),
                           TextField(
                             controller: reviewController,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               hintText: 'Masukkan ulasan Anda',
                               border: InputBorder.none,
                               focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: const Color.fromARGB(255, 245, 245, 245)),
+                                borderSide: BorderSide(
+                                    color: Color.fromARGB(
+                                        255, 245, 245, 245)),
                               ),
                               enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: const Color.fromARGB(255, 253, 252, 252)),
+                                borderSide: BorderSide(
+                                    color: Color.fromARGB(
+                                        255, 253, 252, 252)),
                               ),
                             ),
                           ),
@@ -176,7 +190,9 @@ class _IsiResepAyamWokuState extends State<IsiResepAyamWoku> {
                     SizedBox(height: 16),
                     ElevatedButton(
                       onPressed: submitReview,
-                      child: Text(editingIndex != null ? 'Perbarui Ulasan' : 'Kirim Ulasan'),
+                      child: Text(editingIndex != null
+                          ? 'Perbarui Ulasan'
+                          : 'Kirim Ulasan'),
                     ),
                     SizedBox(height: 16),
                     ListView.builder(
@@ -187,13 +203,17 @@ class _IsiResepAyamWokuState extends State<IsiResepAyamWoku> {
                           width: 200.0,
                           padding: EdgeInsets.all(8),
                           decoration: BoxDecoration(
-                            border: Border.all(color: const Color.fromARGB(255, 251, 250, 250)),
-                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                            border: Border.all(
+                                color:
+                                    const Color.fromARGB(255, 251, 250, 250)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0)),
                           ),
                           child: Column(
                             children: [
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text('Nama: ${userReviews[index]['name']}'),
                                   Row(
@@ -201,7 +221,7 @@ class _IsiResepAyamWokuState extends State<IsiResepAyamWoku> {
                                       IconButton(
                                         icon: Icon(Icons.edit),
                                         onPressed: () {
-                                          editReview(index); 
+                                          editReview(index);
                                         },
                                       ),
                                       IconButton(

@@ -15,7 +15,7 @@ class _SelamatDatangState extends State<SelamatDatang> {
       body: Stack(
         children: <Widget>[
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('lib/assets/Wellcome.jpg'),
                 fit: BoxFit.cover,
@@ -26,7 +26,7 @@ class _SelamatDatangState extends State<SelamatDatang> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text(
+                const Text(
                   'SELAMAT DATANG',
                   style: TextStyle(
                     fontFamily: 'IrishGrover',
@@ -42,7 +42,7 @@ class _SelamatDatangState extends State<SelamatDatang> {
                     ],
                   ),
                 ),
-                Text(
+                const Text(
                   'DI',
                   style: TextStyle(
                     fontFamily: 'IrishGrover',
@@ -58,7 +58,7 @@ class _SelamatDatangState extends State<SelamatDatang> {
                     ],
                   ),
                 ),
-                Text(
+                const Text(
                   'RESEP KOKI',
                   style: TextStyle(
                     fontFamily: 'IrishGrover',
@@ -75,26 +75,26 @@ class _SelamatDatangState extends State<SelamatDatang> {
                   ),
                   
                 ),
-                SizedBox(height: 13), 
+                const SizedBox(height: 13), 
                 ElevatedButton(
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => HalamanAwal()), 
+                      MaterialPageRoute(builder: (context) => const HalamanAwal()), 
                       );
                   },
                   style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+                    padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
                     primary: Color(0xFFC96F06),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(60.0),
                     ),
                   ),
-                  child: Text('MULAI',
+                  child: const Text('MULAI',
                   style: TextStyle(
                     fontSize: 32,
                     fontFamily: 'Acme',
-                    color: const Color.fromARGB(255, 253, 252, 252)
+                    color: Color.fromARGB(255, 253, 252, 252)
                   ),),
                 ),
               ],

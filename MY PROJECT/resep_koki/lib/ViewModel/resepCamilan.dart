@@ -11,14 +11,14 @@ class _ResepCamilanState extends State<ResepCamilan> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF393737),
+      backgroundColor: const Color(0xFF393737),
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 247, 247, 247),
+        backgroundColor: const Color.fromARGB(255, 247, 247, 247),
         centerTitle: true,
-        title: Text(
+        title: const Text(
           'Resep Camilan',
           style: TextStyle(
-            fontFamily: 'Acme', 
+            fontFamily: 'Acme',
             fontSize: 35,
             color: Color(0xFFC96F06),
           ),
@@ -26,9 +26,9 @@ class _ResepCamilanState extends State<ResepCamilan> {
         leading: Image.asset('lib/assets/LOGOO.jpg'),
         actions: <Widget>[
           Padding(
-            padding: EdgeInsets.only(right: 16.0),
+            padding: const EdgeInsets.only(right: 16.0),
             child: IconButton(
-              icon: Icon(
+              icon: const Icon(
                 Icons.chat,
                 size: 40,
                 color: Color.fromARGB(255, 0, 16, 1),
@@ -44,7 +44,7 @@ class _ResepCamilanState extends State<ResepCamilan> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               'Selamat datang di Resep Camilan',
               style: TextStyle(
                 fontSize: 24,
@@ -55,7 +55,7 @@ class _ResepCamilanState extends State<ResepCamilan> {
               onPressed: () {
                 // Tindakan yang akan diambil saat tombol ditekan
               },
-              child: Text('Tombol Contoh'),
+              child: const Text('Tombol Contoh'),
             ),
             // Tambahkan konten lainnya di sini
           ],

@@ -66,14 +66,14 @@ class _MyFormState extends State<MyForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFF393737),
-        title: Text('Tanyakan pada kami'),
+        backgroundColor: const Color(0xFF393737),
+        title: const Text('Tanyakan pada kami'),
       ),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            DrawerHeader(
+            const DrawerHeader(
               decoration: BoxDecoration(
                 color: Color(0xFF393737),
               ),
@@ -90,7 +90,7 @@ ElevatedButton(
   onPressed: () {
     _showChefContacts();
   },
-  child: Text('Lihat Kontak Chef'),
+  child: const Text('Lihat Kontak Chef'),
 ),
 if (showChefContacts)
   Consumer<ChefProvider>(
@@ -137,7 +137,7 @@ if (showChefContacts)
                     }
                     return null;
                   },
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Bahan apa saja yang anda punya?',
                   ),
                 ),
@@ -149,18 +149,18 @@ if (showChefContacts)
                   style: ElevatedButton.styleFrom(
                     primary: Color(0xFF393737),
                   ),
-                  child: Text('Kirim', style: TextStyle(color: Colors.white)),
+                  child: const Text('Kirim', style: TextStyle(color: Colors.white)),
                 ),
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               Container(
                 width: 500.0,
                 height: 515.0,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.0),
-                  color: Color(0xFFD9D9D9),
+                  color: const Color(0xFFD9D9D9),
                 ),
-                padding: EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(16.0),
                 child: Text('$_response'),
               ),
             ],

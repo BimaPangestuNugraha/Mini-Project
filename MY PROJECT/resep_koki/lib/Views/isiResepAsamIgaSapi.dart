@@ -24,7 +24,8 @@ class _IsiResepAsamIgaSapiState extends State<IsiResepAsamIgaSapi> {
 
   void fetchData() async {
     Dio dio = Dio();
-    String url = 'https://653a5019e3b530c8d9e97bc1.mockapi.io/ResepOlahanDaging/5/IsiResepMasakan';
+    String url =
+        'https://653a5019e3b530c8d9e97bc1.mockapi.io/ResepOlahanDaging/5/IsiResepMasakan';
 
     try {
       Response response = await dio.get(url);
@@ -81,11 +82,12 @@ class _IsiResepAsamIgaSapiState extends State<IsiResepAsamIgaSapi> {
       backgroundColor: Color(0xFF393737),
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 175, 173, 173),
-        title: Text(resepData?['namaMasakan'] ?? 'Resep Tidak Ditemukan',
-        style: TextStyle(
-      fontFamily: 'Acme', 
-      color: Colors.black, 
-    ),
+        title: Text(
+          resepData?['namaMasakan'] ?? 'Resep Tidak Ditemukan',
+          style: TextStyle(
+            fontFamily: 'Acme',
+            color: Colors.black,
+          ),
         ),
       ),
       body: resepData != null
@@ -95,7 +97,7 @@ class _IsiResepAsamIgaSapiState extends State<IsiResepAsamIgaSapi> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                   Container(
+                    Container(
                       width: double.infinity,
                       height: 300,
                       decoration: BoxDecoration(
@@ -134,7 +136,8 @@ class _IsiResepAsamIgaSapiState extends State<IsiResepAsamIgaSapi> {
                         color: Colors.white,
                       ),
                       child: Column(
-                        children: (resepData?['bahan'] as List<dynamic>).map((bahan) {
+                        children:
+                            (resepData?['bahan'] as List<dynamic>).map((bahan) {
                           return ListTile(
                             dense: true,
                             title: Text(
@@ -173,12 +176,15 @@ class _IsiResepAsamIgaSapiState extends State<IsiResepAsamIgaSapi> {
                         color: Colors.white,
                       ),
                       child: Column(
-                        children: (resepData?['langkahPembuatan'] as List<dynamic>).map((langkah) {
-                          return Text(langkah.toString(),
-                          style: TextStyle(
-                                fontSize: 14,
-                                fontFamily: 'Acme', 
-                              ),
+                        children:
+                            (resepData?['langkahPembuatan'] as List<dynamic>)
+                                .map((langkah) {
+                          return Text(
+                            langkah.toString(),
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontFamily: 'Acme',
+                            ),
                           );
                         }).toList(),
                       ),
@@ -188,7 +194,8 @@ class _IsiResepAsamIgaSapiState extends State<IsiResepAsamIgaSapi> {
                       width: 200.0,
                       padding: EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        border: Border.all(color: const Color.fromARGB(255, 251, 250, 250)),
+                        border: Border.all(
+                            color: const Color.fromARGB(255, 251, 250, 250)),
                         borderRadius: BorderRadius.all(Radius.circular(10.0)),
                       ),
                       child: Column(
@@ -200,10 +207,14 @@ class _IsiResepAsamIgaSapiState extends State<IsiResepAsamIgaSapi> {
                               hintText: 'Masukkan nama Anda',
                               border: InputBorder.none,
                               focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: const Color.fromARGB(255, 245, 245, 245)),
+                                borderSide: BorderSide(
+                                    color: const Color.fromARGB(
+                                        255, 245, 245, 245)),
                               ),
                               enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: const Color.fromARGB(255, 253, 252, 252)),
+                                borderSide: BorderSide(
+                                    color: const Color.fromARGB(
+                                        255, 253, 252, 252)),
                               ),
                             ),
                           ),
@@ -215,10 +226,14 @@ class _IsiResepAsamIgaSapiState extends State<IsiResepAsamIgaSapi> {
                               hintText: 'Masukkan ulasan Anda',
                               border: InputBorder.none,
                               focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: const Color.fromARGB(255, 245, 245, 245)),
+                                borderSide: BorderSide(
+                                    color: const Color.fromARGB(
+                                        255, 245, 245, 245)),
                               ),
                               enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: const Color.fromARGB(255, 253, 252, 252)),
+                                borderSide: BorderSide(
+                                    color: const Color.fromARGB(
+                                        255, 253, 252, 252)),
                               ),
                             ),
                           ),
@@ -228,7 +243,9 @@ class _IsiResepAsamIgaSapiState extends State<IsiResepAsamIgaSapi> {
                     SizedBox(height: 16),
                     ElevatedButton(
                       onPressed: submitReview,
-                      child: Text(editingIndex != null ? 'Perbarui Ulasan' : 'Kirim Ulasan'),
+                      child: Text(editingIndex != null
+                          ? 'Perbarui Ulasan'
+                          : 'Kirim Ulasan'),
                     ),
                     SizedBox(height: 16),
                     ListView.builder(
@@ -239,13 +256,17 @@ class _IsiResepAsamIgaSapiState extends State<IsiResepAsamIgaSapi> {
                           width: 200.0,
                           padding: EdgeInsets.all(8),
                           decoration: BoxDecoration(
-                            border: Border.all(color: const Color.fromARGB(255, 251, 250, 250)),
-                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                            border: Border.all(
+                                color:
+                                    const Color.fromARGB(255, 251, 250, 250)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0)),
                           ),
                           child: Column(
                             children: [
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text('Nama: ${userReviews[index]['name']}'),
                                   Row(
@@ -253,7 +274,7 @@ class _IsiResepAsamIgaSapiState extends State<IsiResepAsamIgaSapi> {
                                       IconButton(
                                         icon: Icon(Icons.edit),
                                         onPressed: () {
-                                          editReview(index); 
+                                          editReview(index);
                                         },
                                       ),
                                       IconButton(
