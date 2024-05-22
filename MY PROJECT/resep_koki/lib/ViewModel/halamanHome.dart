@@ -4,7 +4,6 @@ import 'resepCamilan.dart';
 import 'resepMinuman.dart';
 import 'resepOlahanDaging.dart';
 import 'resepOlahanKue.dart';
-import 'package:provider/provider.dart';
 
 class HalamanAwal extends StatelessWidget {
   const HalamanAwal({Key? key}) : super(key: key);
