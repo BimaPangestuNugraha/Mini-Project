@@ -1,43 +1,55 @@
 import 'package:flutter/material.dart';
-import 'package:dio/dio.dart';
 
 class IsiResepSemurAyamTahuKentang extends StatefulWidget {
   const IsiResepSemurAyamTahuKentang({Key? key}) : super(key: key);
 
   @override
-  _IsiResepSemurAyamTahuKentangState createState() => _IsiResepSemurAyamTahuKentangState();
+  // ignore: library_private_types_in_public_api
+  _IsiResepSemurAyamTahuKentangState createState() =>
+      _IsiResepSemurAyamTahuKentangState();
 }
 
-class _IsiResepSemurAyamTahuKentangState extends State<IsiResepSemurAyamTahuKentang> {
-  Map<String, dynamic>? resepData;
+class _IsiResepSemurAyamTahuKentangState
+    extends State<IsiResepSemurAyamTahuKentang> {
+  Map<String, dynamic>? resepData = {
+    'namaMasakan': 'Semur Ayam Tahu Kentang',
+    'avatar':
+        'https://th.bing.com/th/id/R.e9cd2f96c3e83c39077b67e1c769ba6b?rik=2C2jGa1oXd4FHA&riu=http%3a%2f%2fbennydoro.com%2fchef%2fwp-content%2fuploads%2fsites%2f3%2f2018%2f02%2f24c081010ee63f05f098b8a0c6229201.jpeg&ehk=H%2f7UwjnEdFFbHO0OP9JBYfany3WFGAYC8fgWVVkr4MI%3d&risl=&pid=ImgRaw&r=0', // URL gambar semur ayam tahu kentang (ganti sesuai kebutuhan)
+    "bahan": [
+      "ayam potong sesuai selera",
+      "tahu potong kotak",
+      "kentang potong dadu",
+      "bumbu dapur (merica, garam, dsb.)",
+      "kecap manis",
+      "saus tomat",
+      "gula pasir",
+      "bawang merah",
+      "bawang putih",
+      "jahe",
+      "daun salam",
+      "serai",
+      "air secukupnya"
+    ],
+    "langkahPembuatan": [
+      "Tumis bawang merah, bawang putih, jahe, daun salam, dan serai hingga harum.",
+      "Masukkan potongan ayam, tumis hingga berubah warna.",
+      "Tambahkan tahu dan kentang, aduk rata.",
+      "Tuangkan air secukupnya, masak hingga ayam dan kentang matang.",
+      "Tambahkan kecap manis, saus tomat, gula pasir, dan bumbu dapur.",
+      "Masak hingga bumbu meresap dan kuah mengental.",
+      "Angkat dan sajikan."
+    ]
+  };
+
   TextEditingController nameController = TextEditingController();
   TextEditingController reviewController = TextEditingController();
   List<Map<String, String>> userReviews = [];
 
-  int? editingIndex; // Menyimpan indeks ulasan yang sedang diedit
+  int? editingIndex; 
 
   @override
   void initState() {
     super.initState();
-    fetchData();
-  }
-
-  void fetchData() async {
-    Dio dio = Dio();
-    String url = 'https://653a5019e3b530c8d9e97bc1.mockapi.io/ResepOlahanDaging/1/IsiResepMasakan';
-
-    try {
-      Response response = await dio.get(url);
-      if (response.statusCode == 200) {
-        setState(() {
-          resepData = Map<String, dynamic>.from(response.data[0]);
-        });
-      } else {
-        print('Gagal mengambil data. StatusCode: ${response.statusCode}');
-      }
-    } catch (error) {
-      print('Terjadi kesalahan: $error');
-    }
   }
 
   void submitReview() {
@@ -45,16 +57,14 @@ class _IsiResepSemurAyamTahuKentangState extends State<IsiResepSemurAyamTahuKent
     String userReview = reviewController.text;
     if (name.isNotEmpty && userReview.isNotEmpty) {
       if (editingIndex != null) {
-        // Jika sedang dalam mode edit, perbarui ulasan
         setState(() {
           userReviews[editingIndex!] = {
             'name': name,
             'review': userReview,
           };
-          editingIndex = null; // Keluar dari mode edit
+          editingIndex = null; 
         });
       } else {
-        // Jika tidak dalam mode edit, tambahkan ulasan baru
         setState(() {
           userReviews.add({
             'name': name,
@@ -78,160 +88,315 @@ class _IsiResepSemurAyamTahuKentangState extends State<IsiResepSemurAyamTahuKent
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF393737),
+      backgroundColor: const Color(0xFF393737),
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 175, 173, 173),
-        title: Text(resepData?['namaMasakan'] ?? 'Resep Tidak Ditemukan',
-        style: TextStyle(
-      fontFamily: 'Acme',
-      color: Colors.black, 
-    ),
+        backgroundColor: const Color.fromARGB(255, 175, 173, 173),
+        title: Text(
+          resepData?['namaMasakan'] ?? 'Resep Tidak Ditemukan',
+          style: const TextStyle(
+            fontFamily: 'Acme',
+            color: Colors.black,
+          ),
         ),
       ),
-      body: resepData != null
-          ? SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: double.infinity,
+                height: 300,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20.0),
+                  child: Image.network(
+                    resepData?['avatar'] ?? '',
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0),
+                  color: const Color(0xFFC96F06),
+                ),
+                child: const Text(
+                  'Bahan-bahan:',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.white,
+                    fontFamily: 'Acme',
+                  ),
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0),
+                  color: const Color(0xFFD9D9D9),
+                ),
                 child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                   Container(
-                      width: double.infinity,
-                      height: 300,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20.0),
-                        child: Image.network(
-                          resepData?['avatar'] ?? '',
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 16),
-                    Text('Bahan-bahan:'),
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.0),
-                        color: Colors.white,
-                      ),
-                      child: Column(
-                        children: (resepData?['bahan'] as List<dynamic>).map((bahan) {
-                          return ListTile(
-                            title: Text(bahan.toString()),
-                          );
-                        }).toList(),
-                      ),
-                    ),
-                    SizedBox(height: 16),
-                    Text('Langkah Pembuatan:'),
-                    Column(
-                      children: (resepData?['langkahPembuatan'] as List<dynamic>).map((langkah) {
-                        return Text(langkah.toString());
-                      }).toList(),
-                    ),
-                    SizedBox(height: 16),
-                    Container(
-                      width: 200.0,
-                      padding: EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: const Color.fromARGB(255, 251, 250, 250)),
-                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                      ),
-                      child: Column(
+                  children: (resepData?['bahan'] as List<dynamic>)
+                      .asMap()
+                      .entries
+                      .map((entry) {
+                    int index = entry.key;
+                    dynamic bahan = entry.value;
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 4.0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Nama:'),
-                          TextFormField(
-                            controller: nameController,
-                            decoration: InputDecoration(
-                              hintText: 'Masukkan nama Anda',
-                              border: InputBorder.none,
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: const Color.fromARGB(255, 245, 245, 245)),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: const Color.fromARGB(255, 253, 252, 252)),
-                              ),
+                          Text(
+                            '${index + 1}.',
+                            style: const TextStyle(
+                              fontSize: 14,
+                              fontFamily: 'Acme',
                             ),
                           ),
-                          SizedBox(height: 16),
-                          Text('Ulasan:'),
-                          TextField(
-                            controller: reviewController,
-                            decoration: InputDecoration(
-                              hintText: 'Masukkan ulasan Anda',
-                              border: InputBorder.none,
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: const Color.fromARGB(255, 245, 245, 245)),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: const Color.fromARGB(255, 253, 252, 252)),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: Text(
+                              bahan.toString(),
+                              style: const TextStyle(
+                                fontSize: 14,
+                                fontFamily: 'Acme',
                               ),
                             ),
                           ),
                         ],
                       ),
-                    ),
-                    SizedBox(height: 16),
-                    ElevatedButton(
-                      onPressed: submitReview,
-                      child: Text(editingIndex != null ? 'Perbarui Ulasan' : 'Kirim Ulasan'),
-                    ),
-                    SizedBox(height: 16),
-                    ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: userReviews.length,
-                      itemBuilder: (context, index) {
-                        return Container(
-                          width: 200.0,
-                          padding: EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: const Color.fromARGB(255, 251, 250, 250)),
-                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    );
+                  }).toList(),
+                ),
+              ),
+              const SizedBox(height: 16),
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0),
+                  color: const Color(0xFFC96F06),
+                ),
+                child: const Text(
+                  'Langkah Pembuatan:',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.white,
+                    fontFamily: 'Acme',
+                  ),
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0),
+                  color: const Color(0xFFD9D9D9),
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: (resepData?['langkahPembuatan'] as List<dynamic>)
+                      .asMap()
+                      .entries
+                      .map((entry) {
+                    int index = entry.key;
+                    dynamic langkah = entry.value;
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 4.0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '${index + 1}.',
+                            style: const TextStyle(
+                              fontSize: 14,
+                              fontFamily: 'Acme',
+                            ),
                           ),
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text('Nama: ${userReviews[index]['name']}'),
-                                  Row(
-                                    children: [
-                                      IconButton(
-                                        icon: Icon(Icons.edit),
-                                        onPressed: () {
-                                          editReview(index); 
-                                        },
-                                      ),
-                                      IconButton(
-                                        icon: Icon(Icons.delete),
-                                        onPressed: () {
-                                          setState(() {
-                                            userReviews.removeAt(index);
-                                          });
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: Text(
+                              langkah.toString(),
+                              style: const TextStyle(
+                                fontSize: 14,
+                                fontFamily: 'Acme',
                               ),
-                              Text(
-                                'Ulasan: ${userReviews[index]['review']}',
-                                style: TextStyle(color: Colors.black),
-                              ),
-                            ],
+                            ),
                           ),
-                        );
-                      },
+                        ],
+                      ),
+                    );
+                  }).toList(),
+                ),
+              ),
+              const SizedBox(height: 30),
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0),
+                  color: const Color(0xFFD9D9D9),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        'Masukkan Ulasan Anda',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          fontFamily: 'Acme',
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        TextFormField(
+                          controller: nameController,
+                          decoration: const InputDecoration(
+                            labelText: 'Masukkan nama Anda',
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black),
+                            ),
+                          ),
+                        ),
+                        if (nameController.text.isEmpty)
+                          const Text(
+                            'Nama tidak boleh kosong !',
+                            style: TextStyle(
+                              color: Colors.red,
+                              fontSize: 12,
+                            ),
+                          ),
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        TextFormField(
+                          controller: reviewController,
+                          decoration: const InputDecoration(
+                            labelText: 'Masukkan ulasan Anda ',
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black),
+                            ),
+                          ),
+                        ),
+                        if (reviewController.text.isEmpty)
+                          const Text(
+                            'Ulasan tidak boleh kosong !',
+                            style: TextStyle(
+                              color: Colors.red,
+                              fontSize: 12,
+                            ),
+                          ),
+                      ],
                     ),
                   ],
                 ),
               ),
-            )
-          : Center(
-              child: CircularProgressIndicator(),
-            ),
+              const SizedBox(height: 10),
+              Align(
+                alignment: Alignment.centerRight,
+                child: ElevatedButton(
+                  onPressed: submitReview,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFFD9D9D9),
+                  ),
+                  child: Text(
+                    editingIndex != null ? 'Perbarui' : 'Kirim',
+                    style: const TextStyle(color: Colors.black),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 10),
+              ListView.builder(
+                shrinkWrap: true,
+                itemCount: userReviews.length,
+                itemBuilder: (context, index) {
+                  return Container(
+                    padding: const EdgeInsets.all(20),
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
+                      color: const Color(0xFFD9D9D9),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Nama : ${userReviews[index]['name']}',
+                              style: const TextStyle(
+                                fontSize: 16,
+                              ),
+                            ),
+                            Row(
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    editReview(index);
+                                  },
+                                  child: const Icon(
+                                    Icons.edit,
+                                    size: 20,
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
+                                InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      userReviews.removeAt(index);
+                                    });
+                                  },
+                                  child: const Icon(
+                                    Icons.delete,
+                                    size: 20,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 2),
+                        Text(
+                          'Ulasan : ${userReviews[index]['review']}',
+                          style: const TextStyle(
+                            fontSize: 16,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

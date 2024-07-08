@@ -7,12 +7,14 @@ void main() {
   runApp(
     ChangeNotifierProvider(
       create: (context) => ChefProvider(), // ini inisialisasi providernya kak agar tersedia diseluruh aplikasi
-      child: MyApp(),
+      child: const MyApp(),
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider( 

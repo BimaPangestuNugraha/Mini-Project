@@ -5,13 +5,16 @@ import 'package:provider/provider.dart';
 import 'package:resep_koki/Models/ChefProvider.dart';
 
 class MyForm extends StatefulWidget {
+  const MyForm({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _MyFormState createState() => _MyFormState();
 }
 
 class _MyFormState extends State<MyForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  TextEditingController _textController = TextEditingController();
+  final TextEditingController _textController = TextEditingController();
   String _response = '';
   bool showChefContacts = false;
 
@@ -38,7 +41,6 @@ class _MyFormState extends State<MyForm> {
 
       if (response.statusCode == 200) {
         final responseData = jsonDecode(response.body);
-        print('Respon sukses: ${responseData['choices'][0]['text']}');
         setState(() {
           _response = responseData['choices'][0]['text'];
         });
@@ -114,7 +116,7 @@ if (showChefContacts)
                 onPressed: () {
                   _hideChefContacts();
                 },
-                child: Text('Tutup'),
+                child: const Text('Tutup'),
               ),
             // Tambahkan informasi kontak atau opsi lainnya sesuai kebutuhan.
           ],
@@ -128,7 +130,7 @@ if (showChefContacts)
             children: [
               Container(
                 width: double.infinity,
-                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
                 child: TextFormField(
                   controller: _textController,
                   validator: (value) {
@@ -161,7 +163,7 @@ if (showChefContacts)
                   color: const Color(0xFFD9D9D9),
                 ),
                 padding: const EdgeInsets.all(16.0),
-                child: Text('$_response'),
+                child: Text(_response),
               ),
             ],
           ),
