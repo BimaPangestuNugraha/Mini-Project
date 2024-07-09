@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:resep_koki/Models/chatOpenAi.dart';
 import 'resepCamilan.dart';
@@ -10,13 +11,10 @@ class HalamanAwal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Get screen width
     double screenWidth = MediaQuery.of(context).size.width;
-
-    // Adjust font sizes based on screen width
-    double titleFontSize = screenWidth * 0.08;  // ~8% of screen width
-    double buttonFontSize = screenWidth * 0.06; // ~6% of screen width
-    double textFontSize = screenWidth * 0.05;   // ~5% of screen width
+    double titleFontSize = screenWidth * 0.08;
+    double buttonFontSize = screenWidth * 0.06;
+    double textFontSize = screenWidth * 0.05;   
 
     return Scaffold(
       backgroundColor: const Color(0xFF393737),
@@ -44,7 +42,7 @@ class HalamanAwal extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => MyForm()),
+                  MaterialPageRoute(builder: (context) => const MyForm()),
                 );
               },
             ),

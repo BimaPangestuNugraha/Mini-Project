@@ -84,8 +84,7 @@ class _SelamatDatangState extends State<SelamatDatang> {
                       );
                   },
                   style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-                    primary: Color(0xFFC96F06),
+                    padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20), backgroundColor: Color(0xFFC96F06),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(60.0),
                     ),

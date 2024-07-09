@@ -8,7 +8,6 @@ class MyForm extends StatefulWidget {
   const MyForm({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _MyFormState createState() => _MyFormState();
 }
 
@@ -118,7 +117,6 @@ if (showChefContacts)
                 },
                 child: const Text('Tutup'),
               ),
-            // Tambahkan informasi kontak atau opsi lainnya sesuai kebutuhan.
           ],
         ),
       ),
@@ -149,7 +147,7 @@ if (showChefContacts)
                 child: ElevatedButton(
                   onPressed: _submitForm,
                   style: ElevatedButton.styleFrom(
-                    primary: Color(0xFF393737),
+                    backgroundColor: Color(0xFF393737),
                   ),
                   child: const Text('Kirim', style: TextStyle(color: Colors.white)),
                 ),

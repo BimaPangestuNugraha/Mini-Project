@@ -731,7 +731,7 @@ class _IsiResepSateSapiState extends State<IsiResepSateSapi> {
                 child: ElevatedButton(
                   onPressed: submitReview,
                   style: ElevatedButton.styleFrom(
-                    primary: const Color(0xFFD9D9D9),
+                    backgroundColor: const Color(0xFFD9D9D9),
                   ),
                   child: Text(
                     editingIndex != null ? 'Perbarui' : 'Kirim',
