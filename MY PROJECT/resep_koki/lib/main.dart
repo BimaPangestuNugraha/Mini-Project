@@ -6,7 +6,7 @@ import 'package:resep_koki/Models/selamatDatangPage.dart';
 void main() {
   runApp(
     ChangeNotifierProvider(
-      create: (context) => ChefProvider(), // ini inisialisasi providernya kak agar tersedia diseluruh aplikasi
+      create: (context) => ChefProvider(), 
       child: const MyApp(),
     ),
   );
